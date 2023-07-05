@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harness Triggers</title>
@@ -82,6 +84,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Harness Triggers</h1>
@@ -111,5 +114,43 @@
             }, 500); // Adjust the duration (in milliseconds) as needed
         });
     </script>
+    <script>
+        // Function to handle button click and API call
+        function handleClick(buttonId, apiEndpoint) {
+            const button = document.getElementById(buttonId);
+
+            button.addEventListener('click', async () => {
+                button.classList.add('clicked');
+                console.log(`${buttonId} button clicked!`);
+
+                try {
+                    const response = await axios.post(apiEndpoint, {
+                        // Add any necessary request body or parameters
+                    });
+
+                    if (response.status === 200) {
+                        console.log('API call successful');
+                        // Add any further actions or handling if needed
+                    } else {
+                        console.log('API call failed');
+                        // Add error handling logic if needed
+                    }
+                } catch (error) {
+                    console.log('API call failed:', error);
+                    // Add error handling logic if needed
+                }
+
+                setTimeout(() => {
+                    button.classList.remove('clicked');
+                }, 500); // Adjust the duration (in milliseconds) as needed
+            });
+        }
+
+        // Call the function for each button with the respective API endpoint
+        handleClick('triggerPipeline', 'https://app.harness.io/gateway/pipeline/api/webhook/custom/bszqak2rSKywttTYmj0QOQ/v3?accountIdentifier=Nyn-zVn6RfuVzrZQU3FjKw&orgIdentifier=default&projectIdentifier=VeronezziPartner_Bootcamp&pipelineIdentifier=pythonapi&triggerIdentifier=APIButtonSiteTrigger');
+        handleClick('featureFlag', 'https://your-api-endpoint.com/feature-flag');
+    </script>
+
 </body>
+
 </html>
