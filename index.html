@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harness Triggers</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            background-color: #02ade5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        button {
+            background-color: white;
+            color: #02ade5;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.4);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        button.clicked::before {
+            transform: translate(-50%, -50%) scale(1.8);
+            opacity: 1;
+        }
+
+        button.clicked {
+            background-color: #02ade5;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Harness Triggers</h1>
+        <button id="triggerPipeline">Trigger Pipeline</button>
+        <button id="featureFlag">Feature Flag</button>
+    </div>
+
+    <script>
+        const triggerPipelineButton = document.getElementById('triggerPipeline');
+        const featureFlagButton = document.getElementById('featureFlag');
+
+        triggerPipelineButton.addEventListener('click', () => {
+            triggerPipelineButton.classList.add('clicked');
+            console.log('Trigger Pipeline button clicked!');
+
+            setTimeout(() => {
+                triggerPipelineButton.classList.remove('clicked');
+            }, 500); // Adjust the duration (in milliseconds) as needed
+        });
+
+        featureFlagButton.addEventListener('click', () => {
+            featureFlagButton.classList.add('clicked');
+            console.log('Feature Flag button clicked!');
+
+            setTimeout(() => {
+                featureFlagButton.classList.remove('clicked');
+            }, 500); // Adjust the duration (in milliseconds) as needed
+        });
+    </script>
+</body>
+</html>
